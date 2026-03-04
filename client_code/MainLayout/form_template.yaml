@@ -27,13 +27,6 @@ components:
     name: sidebar
     properties: {}
     type: ColumnPanel
-  - layout_properties: {expand: true, width: 0}
-    name: content_panel
-    properties:
-      col_spacing: medium
-      spacing:
-        padding: [0, null, null, null]
-    type: ColumnPanel
   layout_properties: {slot: default}
   name: root_pannel
   properties: {}
