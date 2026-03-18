@@ -3,29 +3,46 @@ components:
   name: navbar_links
   properties: {}
   type: FlowPanel
-- components:
-  - event_bindings: {}
-    layout_properties: {grid_position: 'EUNOJG,DPLAKH'}
-    name: btn_fahrer
-    properties: {text: Fahrer}
-    type: Button
-  - event_bindings: {}
-    layout_properties: {grid_position: 'KJVMSJ,KJIZHO'}
-    name: btn_statistik
-    properties: {text: FahrerStats}
-    type: Button
-  - event_bindings: {}
-    layout_properties: {grid_position: 'DROPME,RKSXHT'}
-    name: btn_teams
-    properties: {text: Teams}
-    type: Button
-  - event_bindings: {}
-    layout_properties: {grid_position: 'MATIQE,TTOHMW'}
-    name: btn_weltmeister
-    properties: {text: Weltmeister}
-    type: Button
+- components: []
   layout_properties: {slot: default}
   name: column_panel_1
+  properties: {}
+  type: ColumnPanel
+- components:
+  - event_bindings: {}
+    layout_properties: {grid_position: 'HXRFAL,VLONWT'}
+    name: btn_fahrer
+    properties:
+      spacing:
+        margin: ['0', null, null, null]
+      text: Fahrer
+    type: Button
+  - event_bindings: {}
+    layout_properties: {grid_position: 'NBQCFI,OLOKON'}
+    name: btn_statistik
+    properties:
+      spacing:
+        margin: ['20', null, null, null]
+      text: FahrerStats
+    type: Button
+  - event_bindings: {}
+    layout_properties: {grid_position: 'HYENCP,RSSELQ'}
+    name: btn_teams
+    properties:
+      spacing:
+        margin: ['20', null, null, null]
+      text: Teams
+    type: Button
+  - event_bindings: {}
+    layout_properties: {grid_position: 'OMKTKG,PCHSML'}
+    name: btn_weltmeister
+    properties:
+      spacing:
+        margin: ['20', null, null, null]
+      text: Weltmeister
+    type: Button
+  layout_properties: {slot: left-nav}
+  name: column_panel_2
   properties: {}
   type: ColumnPanel
 container:
