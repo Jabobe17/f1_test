@@ -1,7 +1,9 @@
 from ._anvil_designer import MainLayoutTemplate
 from anvil import *
+import anvil.server
 import plotly.graph_objects as go
 from anvil import GoogleMap
+
 from .DashboardFahrer import DashboardFahrer
 from .DashboardTeams import DashboardTeams
 from .Fahrer import Fahrer
@@ -14,24 +16,69 @@ class MainLayout(MainLayoutTemplate):
   def __init__(self, **properties):
     self.init_components(**properties)
 
-    # Karte initialisieren
-    self.zeige_interlagos()
+    self.marker_strecke = None
 
-  def zeige_interlagos(self):
-    center_lat = -23.7014
-    center_lng = -46.6969
+    self.lade_strecken()
+    self.starte_mit_erster_strecke()
 
-    self.map_1.center = GoogleMap.LatLng(center_lat, center_lng)
+  def lade_strecken(self):
+    strecken = anvil.server.call("get_strecken_liste")
+    self.drop_down_1.items = strecken
+
+  def starte_mit_erster_strecke(self):
+    if not self.drop_down_1.items:
+      return
+
+    erste_strecke = self.drop_down_1.items[0]
+    self.drop_down_1.selected_value = erste_strecke
+    self.zeige_strecke(erste_strecke)
+
+  def zeige_strecke(self, streckenname):
+    daten = anvil.server.call("get_strecke_details", streckenname)
+
+    if not daten:
+      alert("Keine Streckendaten gefunden.")
+      return
+
+    koord_string = daten["Kordinaten"]
+
+    try:
+      lat_str, lng_str = koord_string.split(",")
+      lat = float(lat_str.strip())
+      lng = float(lng_str.strip())
+    except Exception:
+      alert(f"Koordinaten ungültig: {koord_string}")
+      return
+
+    pos = GoogleMap.LatLng(lat, lng)
+
+    self.map_1.center = pos
     self.map_1.zoom = 15
 
-    # Marker
-    marker = GoogleMap.Marker(
-      position=GoogleMap.LatLng(center_lat, center_lng),
-      title="Interlagos"
-    )
-    self.map_1.add_component(marker)
+    if self.marker_strecke is None:
+      self.marker_strecke = GoogleMap.Marker(
+        position=pos,
+        title=daten["Name"]
+      )
+      self.map_1.add_component(self.marker_strecke)
+    else:
+      self.marker_strecke.position = pos
+      self.marker_strecke.title = daten["Name"]
 
+    self.repeating_panel_1.items = [{
+      "Name": daten["Name"],
+      "Land": daten["Land"],
+      "Laenge_km": f'{daten["Laenge_km"]} km'
+    }]
 
+  @handle("drop_down_1", "change")
+  def drop_down_1_change(self, **event_args):
+    streckenname = self.drop_down_1.selected_value
+
+    if not streckenname:
+      return
+
+    self.zeige_strecke(streckenname)
 
   def zeige_form(self, form_klasse):
     self.column_panel_1.clear()

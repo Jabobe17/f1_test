@@ -2,7 +2,7 @@ import anvil.server
 import sqlite3
 from anvil.files import data_files
 
-DB_NAME = "f1_2026.db"
+DB_NAME = "F1_Anvil.db"
 
 
 def get_connection():
@@ -150,3 +150,29 @@ def get_dashboard_team_punkte():
         ORDER BY Punkte DESC
     """
   return run_query(sql)
+
+
+@anvil.server.callable
+def get_strecken_liste():
+  sql = """
+        SELECT Name
+        FROM strecken
+        ORDER BY Name
+    """
+  rows = run_query(sql)
+  return [row["Name"] for row in rows]
+
+
+@anvil.server.callable
+def get_strecke_details(name):
+  sql = """
+        SELECT Name, Land, Kordinaten, Laenge_km
+        FROM strecken
+        WHERE Name = ?
+    """
+  rows = run_query(sql, (name,))
+
+  if not rows:
+    return None
+
+  return rows[0]
