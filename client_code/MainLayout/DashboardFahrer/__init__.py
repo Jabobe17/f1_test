@@ -25,3 +25,9 @@ class DashboardFahrer(DashboardFahrerTemplate):
 
   def btn_zurueck_click(self, **event_args):
     open_form('MainLayout')
+
+  @handle("button_1", "click")
+  def button_1_click(self, **event_args):
+    open_form('MainLayout')    
+    pass
+

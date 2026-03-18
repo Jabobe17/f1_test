@@ -1,7 +1,7 @@
 components:
 - layout_properties: {grid_position: 'YDWLNL,DBEOSG'}
   name: label_1
-  properties: {text: Fahrerstatistik}
+  properties: {align: center, font: '19', text: Fahrerstatistik}
   type: Label
 - components:
   - name: repeating_panel_1

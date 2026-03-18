@@ -1,7 +1,7 @@
 components:
 - layout_properties: {grid_position: 'UVITXS,IKAQJB'}
   name: label_1
-  properties: {text: Weltmeister}
+  properties: {align: center, font_size: 19, text: Weltmeister}
   type: Label
 - components:
   - name: repeating_panel_1

@@ -1,7 +1,7 @@
 components:
 - layout_properties: {grid_position: 'KYJGGQ,AFLTMJ'}
   name: label_1
-  properties: {text: Teams}
+  properties: {align: center, font: '19', text: Teams}
   type: Label
 - components:
   - name: repeating_panel_1

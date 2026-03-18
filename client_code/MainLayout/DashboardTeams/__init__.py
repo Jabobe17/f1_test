@@ -23,3 +23,8 @@ class DashboardTeams(DashboardTeamsTemplate):
     self.plot_1.layout = {
       "title": "Team Punkte Verteilung 2026"
     }
+
+  @handle("button_1", "click")
+  def button_1_click(self, **event_args):
+    open_form('MainLayout')    
+    pass

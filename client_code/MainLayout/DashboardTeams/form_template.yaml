@@ -3,5 +3,10 @@ components:
   name: plot_1
   properties: {}
   type: Plot
+- event_bindings: {}
+  layout_properties: {grid_position: 'OLNMDL,GHNQIB'}
+  name: button_1
+  properties: {text: Home}
+  type: Button
 container: {type: ColumnPanel}
 is_package: true
